@@ -12,12 +12,12 @@ export async function POST(req: NextRequest): Promise<Response> {
     const body = await req.json();
 
     const {from, to, reaction, point = 1} = body;
-
+    let points = Number(point) > 20 ? 20 : point;
     const response = await Reaction.create({
       from,
       to,
       reaction,
-      point,
+      point: points,
     });
 
     return new NextResponse(JSON.stringify({data: response}), {
