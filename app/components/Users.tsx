@@ -23,7 +23,9 @@ const Users = () => {
   return (
     <div className="w-[95%] m-auto mt-[40px]">
       <div className="flex w-[90%] flex-col gap-2 md:flex-row m-auto justify-between mb-[15px]">
-        <p className="text-4xl font-extrabold">People</p>
+        <p className="text-4xl font-extrabold">
+          People <span className="text-primary text-xl">({users?.length})</span>
+        </p>
         <input
           type="text"
           placeholder="Search user, e.g., @0xSiddesh"
