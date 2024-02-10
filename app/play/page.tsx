@@ -43,12 +43,38 @@ export default function Home() {
         "Content-Type": "application/json",
       },
     });
-    const dc = await res.json();
+    const data = await res.json();
 
     if (!res.ok) {
       throw new Error(res.status.toString());
     }
-    setUsers(dc.data);
+
+    // Shuffle the array
+    const shuffledData = shuffleArray(data.data);
+
+    // Set the shuffled array to users
+    setUsers(shuffledData);
+  }
+
+  // Fisher-Yates Shuffle algorithm
+  function shuffleArray(array: UserType[]) {
+    let currentIndex = array.length,
+      temporaryValue,
+      randomIndex;
+
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+
+      // And swap it with the current element.
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+
+    return array;
   }
 
   useEffect(() => {
