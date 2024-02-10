@@ -1,20 +1,21 @@
 "use client";
-import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
+
 import {useSession} from "next-auth/react";
-import {UserType} from "./models/User";
-import React, {useEffect, useState} from "react";
-import {UserContext} from "./context/context";
-import Footer from "./components/Footer";
+import {useEffect, useState} from "react";
+import {UserType} from "../models/User";
+import {getAllUsers} from "../lib/getAllUsers";
+import {UserContext} from "../context/context";
+import Navbar from "../components/Navbar";
+import Users from "../components/Users";
+import Footer from "../components/Footer";
 
 export default function Home() {
   const {data: session}: any = useSession();
+  const [users, setUsers] = useState<UserType[]>([] as UserType[]); // [1]
   const [user, setUser] = useState<UserType>({} as UserType);
-  const [users, setUsers] = useState<UserType[]>([] as UserType[]);
-  const [leaderboard, setLeaderboard] = useState<UserType[]>([] as UserType[]);
+
   const getUser = async () => {
     try {
-      console.log("fetching user from page");
       const response = await fetch(
         `/api/user?username=${session?.user?.username}`
       );
@@ -23,12 +24,18 @@ export default function Home() {
       }
       const data = await response.json();
       setUser(data.data);
-      console.log(data.data);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
+
+  useEffect(() => {
+    if (session?.user) {
+      getUser();
+    }
+  }, [session]);
   async function getAllUsers() {
+    console.log("fetching users from page play");
     const res = await fetch("/api/user", {
       method: "GET",
       headers: {
@@ -36,36 +43,30 @@ export default function Home() {
         "Content-Type": "application/json",
       },
     });
+    const dc = await res.json();
+
     if (!res.ok) {
       throw new Error(res.status.toString());
     }
-    return await res.json();
+    setUsers(dc.data);
   }
-  const getLeaderboard = async () => {
-    const res = await fetch("/api/leaderboard", {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-    });
-    const data = await res.json();
-    console.log(data.data);
-    setLeaderboard(data.data);
-  };
+
   useEffect(() => {
-    if (session?.user) {
-      getUser();
-    }
-  }, [session]);
-  useEffect(() => {
-    getLeaderboard();
+    (async () => {
+      try {
+        const users = await getAllUsers();
+      } catch (error) {
+        console.error("Failed to fetch users:", error);
+        // Handle the error appropriately
+      }
+    })();
   }, []);
+
   return (
     <main className="bg-base-200 min-h-screen">
       <UserContext.Provider value={{user, users, getUser, getAllUsers}}>
         <Navbar />
-        <Hero leaderboard={leaderboard} />
+        <Users />
         <Footer />
       </UserContext.Provider>
     </main>

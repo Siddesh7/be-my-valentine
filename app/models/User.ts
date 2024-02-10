@@ -1,16 +1,16 @@
-import mongoose from "mongoose";
+import mongoose, {Schema, Document} from "mongoose";
 
 // Define the schema interface extending mongoose.Document
-interface UserType extends mongoose.Document {
+export interface UserType extends Document {
   name: string;
   username: string;
   image: string;
-  scores: {9: number; 10: number; 11: number; 12: number; 13: number};
+  reactionCount: {[key: string]: number};
+  scores: {[key: string]: number};
   total: number;
 }
 
-// Schema definition
-const UserSchema = new mongoose.Schema<UserType>({
+const UserSchema = new Schema<UserType>({
   name: {
     type: String,
   },
@@ -22,11 +22,14 @@ const UserSchema = new mongoose.Schema<UserType>({
   image: {
     type: String,
   },
+  reactionCount: {
+    type: Object,
+    default: {9: 20, 10: 20, 11: 20, 12: 20, 13: 20},
+  },
   scores: {
     type: Object,
     default: {9: 0, 10: 0, 11: 0, 12: 0, 13: 0},
   },
-
   total: {
     type: Number,
     default: 0,
@@ -47,5 +50,7 @@ UserSchema.pre("save", function (next) {
   next();
 });
 
-export default mongoose.models.User ||
-  mongoose.model<UserType>("User", UserSchema);
+const UserModel =
+  mongoose.models.User || mongoose.model<UserType>("User", UserSchema);
+
+export default UserModel;
