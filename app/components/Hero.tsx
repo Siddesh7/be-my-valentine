@@ -100,7 +100,9 @@ const Hero: React.FC<HeroProps> = ({leaderboard}) => {
                 </p>
               </div>
               <Link href="/play">
-                {" "}
+                <p className="text-[#7ef87e] mb-[10px] font-bold">
+                  👇Click this button to explore!👇
+                </p>
                 <button className="btn bg-white text-red-500 font-bold py-2 px-4 rounded hover:bg-red-100 transition duration-300 ease-in-out">
                   Unleash Love
                 </button>
