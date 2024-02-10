@@ -24,7 +24,7 @@ const Hero: React.FC<HeroProps> = ({leaderboard}) => {
   return (
     <div>
       <div className="hero mt-[10vh]">
-        <div className="hero-content flex-col lg:items-start lg:flex-row-reverse gap-12">
+        <div className="hero-content flex-col-reverse lg:items-start lg:flex-row-reverse gap-12">
           <div className="text-center lg:text-left lg:min-w-[45vw]">
             <h1 className="text-5xl font-bold flex flex-row gap-2 items-center text-">
               <p className="font-extrabold bg-clip-text text-transparent bg-[linear-gradient(to_right,theme(colors.rose.400),theme(colors.pink.400),theme(colors.purple.400),theme(colors.red.400),theme(colors.purple.400),theme(colors.pink.300),theme(colors.rose.400))] bg-[length:200%_auto] animate-gradient">
