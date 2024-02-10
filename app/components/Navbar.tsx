@@ -53,12 +53,12 @@ const Navbar = () => {
             <div
               className="badge py-[15px] tooltip tooltip-bottom flex flex-row items-center"
               data-tip={`${
-                user.reactionCount && user?.reactionCount[date]
+                user?.reactionCount && user?.reactionCount[date]
               } reactions available`}
             >
               <span className="text-xl md:text-2xl"> {logo}</span>
               <span className="font-bold text-lg md:text-xl ml-2">
-                {user.reactionCount && user?.reactionCount[date]}
+                {user?.reactionCount && user?.reactionCount[date]}
               </span>
             </div>
 

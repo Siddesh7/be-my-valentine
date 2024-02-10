@@ -120,7 +120,7 @@ const UsersCard: React.FC<UsersCardProps> = ({data}) => {
             disabled={
               data.username.toLowerCase() ===
                 session?.user?.username!.toLowerCase() ||
-              (user.reactionCount && user?.reactionCount[date] === 0) ||
+              (user?.reactionCount && user?.reactionCount[date] === 0) ||
               !session?.user
             }
           >

@@ -117,7 +117,7 @@ const UserNotFoundCard: React.FC<UserNotFoundCardProps> = ({input}) => {
             disabled={
               username.toLowerCase() ===
                 session?.user?.username!.toLowerCase() ||
-              (user.reactionCount && user?.reactionCount[date] === 0)
+              (user?.reactionCount && user?.reactionCount[date] === 0)
             }
           >
             Send them <span className="text-2xl">{logo}</span>
