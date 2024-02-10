@@ -16,7 +16,7 @@ const AlertComponent: React.FC<AlertComponentProps> = ({
     const timer = setTimeout(() => {
       setShowAlert(false);
       if (onDismiss) onDismiss(); // Call the callback when dismissing the alert
-    }, 10000); // 10 seconds
+    }, 1000); // 10 seconds
 
     return () => clearTimeout(timer);
   }, [onDismiss]); // Include onDismiss in the dependency array to handle prop changes
