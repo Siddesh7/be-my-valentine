@@ -68,7 +68,13 @@ const Hero: React.FC<HeroProps> = ({leaderboard}) => {
                         </div>
 
                         <td className="text-primary-content font-bold">
-                          {user.username}
+                          <a
+                            href={`https://x.com/${user.username}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            {user.username}
+                          </a>
                         </td>
 
                         <td className="text-primary-content font-bold">
