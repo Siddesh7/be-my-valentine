@@ -50,7 +50,7 @@ const Hero: React.FC<HeroProps> = ({leaderboard}) => {
                   {leaderboard &&
                     leaderboard.map((user, index) => (
                       <tr key={index} className="py-2">
-                        <td>{index}</td>
+                        <td>{index + 1}</td>
                         <div className="avatar ml-[10px]">
                           <div className="mask mask-squircle w-12 h-12">
                             <Image
