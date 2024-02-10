@@ -9,24 +9,25 @@ export async function GET(req: NextRequest): Promise<Response> {
     console.log("GET /api/leaderboard");
     await dbConnect();
 
-    const users = await User.find({}, {_id: 0, __v: 0});
-    console.log(users);
-    users.sort((a, b) => b.total - a.total);
+    // Fetch top 3 users based on their `total` score, excluding `_id` and `__v` fields
+    const users = await User.find({}, {_id: 0, __v: 0})
+      .sort({total: -1}) // Sort users in descending order by `total`
+      .limit(3); // Limit the result to the top 3
 
-    return new NextResponse(JSON.stringify({data: users}), {
+    console.log(users);
+
+    return new Response(JSON.stringify({data: users}), {
       headers: {
         "Content-Type": "application/json",
       },
     });
   } catch (err) {
-    return new NextResponse(
-      JSON.stringify({message: "Internal server error"}),
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    console.error(err); // Log the error for debugging purposes
+    return new Response(JSON.stringify({message: "Internal server error"}), {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
   }
 }
 
