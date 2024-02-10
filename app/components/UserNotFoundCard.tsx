@@ -5,6 +5,7 @@ import {FaHandHolding} from "react-icons/fa6";
 import sendReaction from "../lib/sendReaction";
 import {useUserContext} from "../context/context";
 import AlertComponent from "./AlertComponent";
+import ErrorComponent from "./Error";
 
 interface UserNotFoundCardProps {
   input: string;
@@ -16,9 +17,9 @@ const UserNotFoundCard: React.FC<UserNotFoundCardProps> = ({input}) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
-  const [points, setPoints] = useState(1);
+  const [points, setPoints] = useState<string>("1");
   const {user, getUser, getAllUsers} = useUserContext();
-
+  const [pointsError, setPointsError] = useState(false);
   const date = new Date().getDate();
   useEffect(() => {
     switch (date) {
@@ -51,14 +52,17 @@ const UserNotFoundCard: React.FC<UserNotFoundCardProps> = ({input}) => {
     if (usernameInput.startsWith("@")) {
       usernameInput = usernameInput.slice(1);
     }
-    console.log(session?.user?.username, usernameInput, date, points);
+
+    if (points == undefined || points === "" || pointsError) return;
+
     getUser();
     setLoading(true);
+
     const res = await sendReaction(
       session?.user?.username,
       usernameInput,
       date,
-      points
+      Number(points)
     );
 
     if (res) {
@@ -93,11 +97,19 @@ const UserNotFoundCard: React.FC<UserNotFoundCardProps> = ({input}) => {
             onChange={(e) => setUsername(e.target.value)}
           />
           <input
-            type="number"
+            type="text"
             placeholder="5 points"
             className="input input-bordered input-primary   w-[30%] md:w-[10%] mb-[20px] rounded-2xl"
             value={points}
-            onChange={(e) => setPoints(Number(e.target.value))}
+            onChange={(e) => {
+              if (Number(e.target.value) > user?.reactionCount[date]) {
+                setPointsError(true);
+              }
+              if (Number(e.target.value) <= user?.reactionCount[date]) {
+                setPointsError(false);
+              }
+              setPoints(e.target.value as any);
+            }}
           />
         </div>
 
@@ -117,7 +129,8 @@ const UserNotFoundCard: React.FC<UserNotFoundCardProps> = ({input}) => {
             disabled={
               username.toLowerCase() ===
                 session?.user?.username!.toLowerCase() ||
-              (user?.reactionCount && user?.reactionCount[date] === 0)
+              (user?.reactionCount && user?.reactionCount[date] === 0) ||
+              pointsError
             }
           >
             Send them <span className="text-2xl">{logo}</span>
@@ -136,6 +149,9 @@ const UserNotFoundCard: React.FC<UserNotFoundCardProps> = ({input}) => {
             type="error"
             onDismiss={resetError}
           />
+        )}
+        {pointsError && (
+          <ErrorComponent message="You don't have enough points" />
         )}
       </div>
     </div>
