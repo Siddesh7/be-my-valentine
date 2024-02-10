@@ -89,10 +89,24 @@ const UsersCard: React.FC<UsersCardProps> = ({data}) => {
           />
         </figure>
         <div className="card-body">
-          <h2 className="card-title">
+          <a
+            href={`http://x.com/${data?.username}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="card-title"
+          >
             {data.name.length == 0 ? data.username : data.name}
-          </h2>{" "}
-          <div className="badge badge-secondary">{data.username!}</div>
+          </a>
+          <div className="badge badge-secondary">
+            {" "}
+            <a
+              href={`http://x.com/${data?.username}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {data.username!}
+            </a>
+          </div>
           <div className="flex flex-wrap gap-2">
             {" "}
             <div className="badge badge-outline">
