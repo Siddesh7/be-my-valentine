@@ -32,6 +32,11 @@ const Users = () => {
           onChange={(e) => setSearchInput(e.target.value)}
         />
       </div>
+      <p className="text-xl w-[88%] md:w-[90%] m-auto my-[20px] text-primary">
+        If you don&apos;t see the user listed, just type their username above
+        and send them teddy. make a tweet later and let them try out without you
+        directly inviting.
+      </p>
       {filteredUsers.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 grid-flow-row gap-4 justify-evenly">
           {filteredUsers.map((user, index) => (
