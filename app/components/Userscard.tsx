@@ -120,7 +120,8 @@ const UsersCard: React.FC<UsersCardProps> = ({data}) => {
             disabled={
               data.username.toLowerCase() ===
                 session?.user?.username!.toLowerCase() ||
-              (user.reactionCount && user?.reactionCount[date] === 0)
+              (user.reactionCount && user?.reactionCount[date] === 0) ||
+              !session?.user
             }
           >
             Give <span className="text-2xl">{logo}</span>
@@ -136,6 +137,13 @@ const UsersCard: React.FC<UsersCardProps> = ({data}) => {
         {error && (
           <AlertComponent
             message="Error! Try Again!"
+            type="error"
+            onDismiss={resetError}
+          />
+        )}
+        {!session?.user && (
+          <AlertComponent
+            message="You need to login to send reactions"
             type="error"
             onDismiss={resetError}
           />
