@@ -106,12 +106,12 @@ const Hero: React.FC<HeroProps> = ({leaderboard}) => {
                 <p className="text-[#7ef87e] mb-[10px] font-bold">
                   👇Click this button to explore!👇
                 </p>
-                <button className="btn bg-white text-red-500 font-bold py-2 px-4 rounded hover:bg-red-100 transition duration-300 ease-in-out">
+                <button className="btn bg-white text-red-500 w-[200px] font-bold py-2 px-4 rounded hover:bg-red-100 transition duration-300 ease-in-out">
                   Explore, Send Reactions
                 </button>
               </Link>
               <Link href="#crushed">
-                <button className="btn lg:hidden glass font-bold py-2 px-4 rounded mx-[20px]">
+                <button className="btn lg:hidden w-[200px] glass font-bold md:py-2 md:ml-[20px] rounded my-[20px]">
                   Leaderboard
                 </button>
               </Link>
