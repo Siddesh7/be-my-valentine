@@ -34,7 +34,10 @@ const Hero: React.FC<HeroProps> = ({leaderboard}) => {
               <FaHeart className=" text-primary text-4xl  mr-2 ml-0" />
             </h1>
 
-            <div className="overflow-x-auto rounded-2xl border-[1px] border-primary mt-[15px]">
+            <div
+              className="overflow-x-auto rounded-2xl border-[1px] border-primary mt-[15px]"
+              id="crushed"
+            >
               <table className="table ">
                 {/* head */}
                 <thead className="bg-gradient-to-r from-pink-500 to-red-500 text-white text-primary-content">
@@ -104,7 +107,12 @@ const Hero: React.FC<HeroProps> = ({leaderboard}) => {
                   👇Click this button to explore!👇
                 </p>
                 <button className="btn bg-white text-red-500 font-bold py-2 px-4 rounded hover:bg-red-100 transition duration-300 ease-in-out">
-                  Unleash Love
+                  Explore, Send Reactions
+                </button>
+              </Link>
+              <Link href="#crushed">
+                <button className="btn lg:hidden glass font-bold py-2 px-4 rounded mx-[20px]">
+                  Leaderboard
                 </button>
               </Link>
             </div>

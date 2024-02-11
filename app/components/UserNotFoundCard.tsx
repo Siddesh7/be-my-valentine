@@ -98,7 +98,7 @@ const UserNotFoundCard: React.FC<UserNotFoundCardProps> = ({input}) => {
           />
           <input
             type="text"
-            placeholder="5 points"
+            placeholder="points"
             className="input input-bordered input-primary   w-[30%] md:w-[10%] mb-[20px] rounded-2xl"
             value={points}
             onChange={(e) => {
