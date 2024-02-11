@@ -86,12 +86,12 @@ const Users = () => {
             d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
           ></path>
         </svg>
-        <div className="flex flex-col md:flex-row md:gap-2">
+        <div className="flex flex-col md:flex-row md:gap-2 justify-center items-center ">
           <span className="w-full">
             Everyday you get 20 reactions, to spend. Since today is Feb {date},
             you get 20
           </span>
-          <span className="text-xl text-primary">{logo}</span>
+          <span className="text-xl text-primary ">{logo}</span>
         </div>
       </div>
       {filteredUsers.length > 0 ? (
