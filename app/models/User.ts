@@ -8,6 +8,7 @@ export interface UserType extends Document {
   reactionCount: {[key: string]: number};
   scores: {[key: string]: number};
   total: number;
+  confessionsReceived: String[];
 }
 
 const UserSchema = new Schema<UserType>({
@@ -33,6 +34,9 @@ const UserSchema = new Schema<UserType>({
   total: {
     type: Number,
     default: 0,
+  },
+  confessionsReceived: {
+    type: [String],
   },
 });
 

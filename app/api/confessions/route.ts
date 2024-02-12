@@ -3,21 +3,20 @@ import dbConnect from "../../lib/dbConnect";
 import User from "../../models/User";
 
 import {NextRequest, NextResponse} from "next/server";
+import ConfessionModel from "@/app/models/Confession";
 
 export async function POST(req: NextRequest): Promise<Response> {
   try {
-    console.log("POST /api/reaction");
+    console.log("POST /api/confessions");
     await dbConnect();
 
     const body = await req.json();
 
-    const {from, to, reaction, point = 1} = body;
-    let points = Number(point) > 20 ? 20 : point;
-    const response = await Reaction.create({
+    const {from, to, message} = body;
+    const response = await ConfessionModel.create({
       from,
       to,
-      reaction,
-      point: points,
+      message,
     });
 
     return new NextResponse(JSON.stringify({data: response}), {
@@ -40,15 +39,14 @@ export async function POST(req: NextRequest): Promise<Response> {
 
 export async function GET(req: NextRequest): Promise<Response> {
   try {
-    console.log("GET /api/reeactions");
+    console.log("GET /api/confessions");
     await dbConnect();
     const url = new URL(req.url);
     const username = url.searchParams.get("username");
 
     if (!username) {
-      const reactions = await Reaction.find();
-
-      return new NextResponse(JSON.stringify({reactions}), {
+      const confessions = await ConfessionModel.find();
+      return new NextResponse(JSON.stringify({confessions}), {
         status: 200,
         headers: {
           "Content-Type": "application/json",
@@ -56,8 +54,8 @@ export async function GET(req: NextRequest): Promise<Response> {
       });
     }
 
-    const reactionsReceived = await Reaction.find({to: username});
-    const reactionsSent = await Reaction.find({from: username});
+    const reactionsReceived = await ConfessionModel.find({to: username});
+    const reactionsSent = await ConfessionModel.find({from: username});
     return new NextResponse(
       JSON.stringify({reactionsReceived, reactionsSent}),
       {

@@ -8,6 +8,7 @@ import sendReaction from "../lib/sendReaction";
 import AlertComponent from "./AlertComponent";
 import {UserContext, useUserContext} from "../context/context";
 import {UserType} from "../models/User";
+import ConfessModal from "./ConfessModal";
 
 interface UsersCardProps {
   data: UserType;
@@ -128,18 +129,30 @@ const UsersCard: React.FC<UsersCardProps> = ({data}) => {
             <span className="loading loading-spinner text-primary"></span>
           </button>
         ) : (
-          <button
-            onClick={handleSendReaction}
-            className="btn btn-primary w-[90%] m-auto text-lg rounded-xl"
-            disabled={
-              data.username.toLowerCase() ===
-                session?.user?.username!.toLowerCase() ||
-              (user?.reactionCount && user?.reactionCount[date] === 0) ||
-              !session?.user
-            }
-          >
-            Give <span className="text-2xl">{logo}</span>
-          </button>
+          <div className="flex flex-col gap-2">
+            {" "}
+            <button
+              onClick={handleSendReaction}
+              className="btn btn-primary w-[90%] m-auto flex items-center justify-center text-lg rounded-xl"
+              disabled={
+                data.username.toLowerCase() ===
+                  session?.user?.username!.toLowerCase() ||
+                (user?.reactionCount && user?.reactionCount[date] === 0) ||
+                !session?.user
+              }
+            >
+              {!session?.user ? (
+                <span className="flex gap-x-2">
+                  Login to give <span className="text-2xl">{logo}</span>
+                </span>
+              ) : (
+                <span>
+                  Give <span className="text-2xl">{logo}</span>
+                </span>
+              )}
+            </button>
+            <ConfessModal data={data} />
+          </div>
         )}
         {success && (
           <AlertComponent
@@ -151,13 +164,6 @@ const UsersCard: React.FC<UsersCardProps> = ({data}) => {
         {error && (
           <AlertComponent
             message="Error! Try Again!"
-            type="error"
-            onDismiss={resetError}
-          />
-        )}
-        {!session?.user && (
-          <AlertComponent
-            message="You need to login to send reactions"
             type="error"
             onDismiss={resetError}
           />

@@ -23,6 +23,18 @@ const Hero: React.FC<HeroProps> = ({leaderboard}) => {
   console.log(leaderboard);
   return (
     <div>
+      {" "}
+      <div
+        role="alert"
+        className="alert alert-success w-[95vw] m-auto my-[20px]"
+      >
+        <Link href={"/me"}>
+          {" "}
+          <span className="text-xl text-white">
+            💡 Now read confessions! click here
+          </span>
+        </Link>
+      </div>
       <div className="hero mt-[10vh]">
         <div className="hero-content flex-col-reverse lg:items-start lg:flex-row-reverse gap-12">
           <div className="text-center lg:text-left lg:min-w-[45vw]">

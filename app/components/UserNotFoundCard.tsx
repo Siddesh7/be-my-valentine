@@ -6,6 +6,8 @@ import sendReaction from "../lib/sendReaction";
 import {useUserContext} from "../context/context";
 import AlertComponent from "./AlertComponent";
 import ErrorComponent from "./Error";
+import ConfessModal from "./ConfessModal";
+import {UserType} from "../models/User";
 
 interface UserNotFoundCardProps {
   input: string;
@@ -121,20 +123,24 @@ const UserNotFoundCard: React.FC<UserNotFoundCardProps> = ({input}) => {
             <span className="loading loading-spinner text-primary"></span>
           </button>
         ) : (
-          <button
-            onClick={() => {
-              handleSendReaction(username);
-            }}
-            className="btn btn-primary w-[90%] m-auto text-lg rounded-xl"
-            disabled={
-              username.toLowerCase() ===
-                session?.user?.username!.toLowerCase() ||
-              (user?.reactionCount && user?.reactionCount[date] === 0) ||
-              pointsError
-            }
-          >
-            Send them <span className="text-2xl">{logo}</span>
-          </button>
+          <div className="flex flex-col gap-2">
+            {" "}
+            <button
+              onClick={() => {
+                handleSendReaction(username);
+              }}
+              className="btn btn-primary w-[90%] m-auto text-lg rounded-xl"
+              disabled={
+                username.toLowerCase() ===
+                  session?.user?.username!.toLowerCase() ||
+                (user?.reactionCount && user?.reactionCount[date] === 0) ||
+                pointsError
+              }
+            >
+              Send them <span className="text-2xl">{logo}</span>
+            </button>
+            <ConfessModal data={{username} as UserType} />
+          </div>
         )}
         {success && (
           <AlertComponent
@@ -151,7 +157,10 @@ const UserNotFoundCard: React.FC<UserNotFoundCardProps> = ({input}) => {
           />
         )}
         {pointsError && (
-          <ErrorComponent message="You don't have enough points" />
+          <ErrorComponent
+            message="You don't have enough points"
+            style="w-[90%] m-auto"
+          />
         )}
       </div>
     </div>

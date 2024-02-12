@@ -1,16 +1,14 @@
 import React, {useEffect} from "react";
 interface AlertComponentProps {
   message: string;
+  style?: string;
 }
 
-const ErrorComponent: React.FC<AlertComponentProps> = ({message}) => {
+const ErrorComponent: React.FC<AlertComponentProps> = ({message, style}) => {
   return (
     <>
       {" "}
-      <div
-        role="alert"
-        className={`alert w-[90%] m-auto mt-[10px] alert-error`}
-      >
+      <div role="alert" className={`alert mt-[10px] alert-error ${style}`}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="stroke-current shrink-0 h-6 w-6"
