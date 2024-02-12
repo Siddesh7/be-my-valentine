@@ -23,7 +23,7 @@ const Reactions = ({username}: ReactionsProps) => {
         <div className="max-w-[95vw] m-auto">
           <div className="my-[30px] max-w-[90vw] m-auto">
             <div className="flex items-center justify-between gap-x-2">
-              <p className="text-4xl font-extrabold">
+              <p className="text-xl md:text-4xl font-extrabold">
                 {showSent ? "Reactions Sent" : "Reactions Received"}
               </p>
               <div className="flex gap-x-2">
