@@ -11,7 +11,7 @@ const UserReactions = () => {
   return (
     <div>
       {user && <Confessions username={user?.username} />}{" "}
-      {user && <Reactions username={user?.username} />}
+      {/* {user && <Reactions username={user?.username} />} */}
       {!user && (
         <ErrorComponent message="Login to see" style="w-[90vw] m-auto" />
       )}
