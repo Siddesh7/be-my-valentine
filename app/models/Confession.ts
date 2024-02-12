@@ -48,8 +48,8 @@ ConfessionSchema.post("save", async function (doc) {
     }
 
     // Update the user's scores and total
-    if (user) {
-      user.confessionsReceived.push(message);
+    if (user && user?.confessionsReceived) {
+      user?.confessionsReceived.push(message);
       user.markModified("messages");
       await user.save();
     }
