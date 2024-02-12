@@ -1,6 +1,7 @@
 "use client";
 import React, {useEffect, useState} from "react";
 import {getPointsSpent} from "../lib/getPointsSpent";
+import {FaHandHolding} from "react-icons/fa6";
 interface ReactionsProps {
   username: string;
 }
@@ -10,7 +11,30 @@ const Reactions = ({username}: ReactionsProps) => {
   const getReactions = async () => {
     const res = await getPointsSpent(username);
     setReaction(res);
-    console.log(res);
+  };
+  const getLogo = (date: number) => {
+    switch (date) {
+      case 9:
+        return "🍫";
+        break;
+      case 10:
+        return "🐻";
+        break;
+      case 11:
+        return <FaHandHolding />;
+        break;
+      case 12:
+        return "🫂";
+        break;
+      case 13:
+        return "💋";
+        break;
+      case 14:
+        return "💙";
+        break;
+      default:
+        return "💙";
+    }
   };
   useEffect(() => {
     getReactions();
@@ -57,7 +81,7 @@ const Reactions = ({username}: ReactionsProps) => {
                               <td>{index}</td>
                               <td>{reaction.to}</td>
                               <td>{reaction.point}</td>
-                              <td>{reaction.reaction}</td>
+                              <td>{getLogo(reaction.reaction)}</td>
                             </tr>
                           );
                         }
@@ -80,7 +104,7 @@ const Reactions = ({username}: ReactionsProps) => {
                               <td>{index}</td>
                               <td>{reaction.from}</td>
                               <td>{reaction.point}</td>
-                              <td>{reaction.reaction}</td>
+                              <td>{getLogo(reaction.reaction)}</td>
                             </tr>
                           );
                         }
