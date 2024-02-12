@@ -61,7 +61,7 @@ const ConfessModal: React.FC<ConfessModalProps> = ({data}) => {
         Confess
       </button>
       <dialog id="my_modal_3" ref={modalRef} className="modal">
-        <div className="modal-box w-full">
+        <div className="modal-box w-[90vw] md:w-full">
           <h3 className="font-bold text-lg">
             aahah! I see what you are doing!
           </h3>
