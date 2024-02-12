@@ -81,7 +81,7 @@ const Reactions = ({username}: ReactionsProps) => {
                               <td>{index}</td>
                               <td>{reaction.to}</td>
                               <td>{reaction.point}</td>
-                              <td>{getLogo(reaction.reaction)}</td>
+                              <td>{getLogo(Number(reaction.reaction))}</td>
                             </tr>
                           );
                         }
@@ -104,7 +104,7 @@ const Reactions = ({username}: ReactionsProps) => {
                               <td>{index}</td>
                               <td>{reaction.from}</td>
                               <td>{reaction.point}</td>
-                              <td>{getLogo(reaction.reaction)}</td>
+                              <td>{getLogo(Number(reaction.reaction))}</td>
                             </tr>
                           );
                         }
