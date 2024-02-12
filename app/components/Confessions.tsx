@@ -51,7 +51,7 @@ const Reactions = ({username}: ReactionsProps) => {
                             <div className="card-body">
                               {reaction?.from !== "anon" ? (
                                 <h2 className="card-title">
-                                  Received from{" "}
+                                  Sent to{" "}
                                   <span className="text-primary">
                                     {reaction?.from}
                                   </span>
