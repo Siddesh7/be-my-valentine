@@ -40,8 +40,8 @@ const Reactions = ({username}: ReactionsProps) => {
             <div className="overflow-x-auto mt-[15px]">
               {showSent ? (
                 <div className="flex flex-col gap-2">
-                  {reaction.reactionsSent &&
-                    reaction.reactionsSent.map(
+                  {reaction?.reactionsSent &&
+                    reaction?.reactionsSent.map(
                       (reaction: any, index: number) => {
                         return (
                           <div
@@ -53,7 +53,7 @@ const Reactions = ({username}: ReactionsProps) => {
                                 <h2 className="card-title">
                                   Sent to{" "}
                                   <span className="text-primary">
-                                    {reaction?.from}
+                                    {reaction?.to}
                                   </span>
                                 </h2>
                               ) : (
