@@ -10,8 +10,9 @@ const Reactions = ({username}: ReactionsProps) => {
   const [showSent, setShowSent] = useState<boolean>(false);
   const getConfessionsForUser = async () => {
     const res = await getConfessions(username);
-    setReaction(res.reverse());
-    console.log(res);
+    const sent = res.reactionsSent.reverse();
+    const received = res.reactionsReceived.reverse();
+    setReaction({reactionsSent: sent, reactionsReceived: received});
   };
   useEffect(() => {
     getConfessionsForUser();
