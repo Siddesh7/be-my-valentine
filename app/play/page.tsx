@@ -53,7 +53,7 @@ export default function Home() {
     const shuffledData = shuffleArray(data.data);
 
     // Set the shuffled array to users
-    setUsers(shuffledData);
+    setUsers(shuffledData as UserType[]);
   }
 
   // Fisher-Yates Shuffle algorithm
