@@ -58,7 +58,8 @@ export default function Home() {
 
   // Fisher-Yates Shuffle algorithm
   function shuffleArray(array: UserType[]) {
-    let currentIndex = array.length,
+    if (!array) return;
+    let currentIndex = array?.length,
       temporaryValue,
       randomIndex;
 
@@ -78,14 +79,11 @@ export default function Home() {
   }
 
   useEffect(() => {
-    (async () => {
-      try {
-        const users = await getAllUsers();
-      } catch (error) {
-        console.error("Failed to fetch users:", error);
-        // Handle the error appropriately
-      }
-    })();
+    try {
+      const users = getAllUsers();
+    } catch (error) {
+      console.error("Failed to fetch users:", error);
+    }
   }, []);
 
   return (

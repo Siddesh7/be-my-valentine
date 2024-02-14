@@ -9,6 +9,7 @@ import Navbar from "../components/Navbar";
 import Users from "../components/Users";
 import Footer from "../components/Footer";
 import UserReactions from "../components/UserReactions";
+import ErrorComponent from "../components/Error";
 
 export default function Home() {
   const {data: session}: any = useSession();
@@ -93,7 +94,14 @@ export default function Home() {
     <main className="bg-base-200 min-h-screen">
       <UserContext.Provider value={{user, users, getUser, getAllUsers}}>
         <Navbar />
-        <UserReactions />
+        {session?.user ? (
+          <UserReactions />
+        ) : (
+          <ErrorComponent
+            message="Login to see all the confessions received"
+            style="w-[95vw] m-auto"
+          />
+        )}
         <Footer />
       </UserContext.Provider>
     </main>
